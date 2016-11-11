@@ -3,10 +3,11 @@ var request = Promise.promisifyAll(require('request'));
 request.debug;
 var qs = require('querystring');
 
-var GlideRecord = function(instance, tablename, user, password, apiversion) {
+var GlideRecord = function(instance, tablename, user, password, apiversion, host) {
 
     this.apiversion = apiversion ? apiversion + '/' : '';
-    this.baseurl = 'https://' + instance + '.service-now.com/api/now/' + this.apiversion + 'table/' + tablename;
+    this.host = host ? host : 'service-now.com';
+    this.baseurl = 'https://' + instance + '/' +  host + '/api/now/' + this.apiversion + 'table/' + tablename;
     this.user = user;
     this.pass = password;
     this.tablename = tablename;
